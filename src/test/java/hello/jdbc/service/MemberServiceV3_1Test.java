@@ -37,6 +37,7 @@ class MemberServiceV3_1Test {
         memberRepository = new MemberRepositoryV3(dataSource);
 
         // DataSourceTransactionManager의 파라미터로 데이터 소스를 넘겨주어야 한다.
+        // JDBC를 사용하기 때문에 transactionManager는 DataSourceTransactionManager로 주입받아야 한다.
         PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
         memberService = new MemberServiceV3_1(transactionManager, memberRepository);
     }

@@ -12,6 +12,7 @@ import java.sql.SQLException;
  * 트랜잭션 - @Transactional AOP
  */
 @Slf4j
+//@Transactional // 클래스에 붙혀도 된다. (클래스에 붙히면 외부에서 호출 가능한 public 메서드가 AOP의 적용대상이 된다.)
 public class MemberServiceV3_3 {
 
     private final MemberRepositoryV3 memberRepository;
@@ -20,7 +21,7 @@ public class MemberServiceV3_3 {
         this.memberRepository = memberRepository;
     }
 
-    @Transactional // bizLogic 성공시 commit, 실패시 rollback
+    @Transactional // bizLogic 성공시 commit, 실패시 rollback (메서드에 붙혀 된다.)
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
         bizLogic(fromId, toId, money);
     }

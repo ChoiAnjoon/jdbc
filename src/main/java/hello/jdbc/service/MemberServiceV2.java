@@ -51,7 +51,7 @@ public class MemberServiceV2 {
     private void release(Connection con) {
         if (con != null) {
             try {
-                con.setAutoCommit(true); // 커넥션 풀을 고려해서 commit을 auto로 바꿔줌
+                con.setAutoCommit(true); // 커넥션 풀을 고려해서 commit을 auto로 바꿔주고 커넥션을 반환
                 con.close();
             } catch (Exception e) {
                 log.info("error", e);
