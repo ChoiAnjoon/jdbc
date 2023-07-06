@@ -1,11 +1,14 @@
 package hello.jdbc.exception.basic;
 
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.net.ConnectException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
+@Slf4j
 public class UncheckedAppTest {
 
 
@@ -14,6 +17,17 @@ public class UncheckedAppTest {
         Controller controller = new Controller();
         Assertions.assertThatThrownBy(() -> controller.request())
                 .isInstanceOf(RuntimeSQLException.class);
+    }
+
+    @Test
+    void printEx() {
+        Controller controller = new Controller();
+        try {
+            controller.request();
+        } catch (Exception e) {
+//            e.printStackTrace(); // 이렇게 로그를 남기는 것은 좋지 않다. --> System.out.println에 사용
+            log.info("ex", e); // 실무에서는 이런식으로 log를 사용
+        }
     }
 
     static class Controller {
@@ -47,6 +61,8 @@ public class UncheckedAppTest {
             } catch (SQLException e) {
                 throw new RuntimeSQLException(e);
             }
+            // checked 예외를 unchecked 예외(runtimeException)으로 전환 할때는
+            // 위와 같이 꼭 기존 예외를 포함 시켜 주어야 한다.
         }
 
         public void runSQL() throws SQLException {
@@ -62,7 +78,12 @@ public class UncheckedAppTest {
     }
 
     static class RuntimeSQLException extends RuntimeException {
-        public RuntimeSQLException(Throwable cause) {
+
+        public RuntimeSQLException() {
+            super();
+        }
+
+        public RuntimeSQLException(Throwable cause) { // 기존 예외를 담을수 있게 제공 해주는 생성자 (연결된 예외)
             super(cause);
         }
     }
