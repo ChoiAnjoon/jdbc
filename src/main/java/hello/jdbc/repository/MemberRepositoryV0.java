@@ -65,7 +65,7 @@ public class MemberRepositoryV0 {
 
     }
 
-    public void update(String memberId, int Money) throws SQLException {
+    public void update(String memberId, int money) throws SQLException {
         String sql = "update member set money=? where member_id=?";
 
         Connection con = null;
@@ -74,7 +74,7 @@ public class MemberRepositoryV0 {
         try {
             con = getConnection();
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, Money);
+            pstmt.setInt(1, money);
             pstmt.setString(2, memberId);
             int resultsize = pstmt.executeUpdate();
             log.info("resultSize={}", resultsize);
