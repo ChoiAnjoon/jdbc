@@ -39,7 +39,7 @@ class MemberServiceV4Test {
     @TestConfiguration
     static class TestConfig {
 
-        private final DataSource dataSource; // spring 컨테이너에 등록된 datasource(application.properties에서 자동으로 만들어진 datasource)를 여기에다 넣어준다.
+        private final DataSource dataSource; // spring이 컨테이너에 등록된 datasource(application.properties에서 자동으로 만들어진 datasource)를 여기에다 넣어준다.
 
         public TestConfig(DataSource dataSource) {
             this.dataSource = dataSource;

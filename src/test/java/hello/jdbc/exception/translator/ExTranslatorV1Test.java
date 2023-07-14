@@ -57,6 +57,8 @@ public class ExTranslatorV1Test {
                 log.info("데이터 접근 계층 예외", e);
                 throw e;
             }
+            // MyDBException 예외를 잡지 않아도 된다. 어차피 복구할 수 없는 예외는 공통으로 처리하는 부분까지 전달 되기 때문이다.
+            // 복구 할 수 없는 예외는 공통으로 예외를 처리하는 곳에서 예외 로그를 남기는 것이 좋다.
         }
 
         private String generateNewId(String memberId) {

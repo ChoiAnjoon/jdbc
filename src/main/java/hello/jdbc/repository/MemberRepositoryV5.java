@@ -58,7 +58,7 @@ public class MemberRepositoryV5 implements MemberRepository{
         };
     }
 
-    // 커넥션 동기화도 해줄 필요없음 JdbcTemplate에서 다 해줌
+    // JDBC Template을 쓰면 트랜잭션을 위한 커넥션 동기화, 예외 발생시 스프링 예외 변환기도 자동으로 실행해 준다.
 
 //    private void close(Connection con, Statement stmt, ResultSet rs) {
 //
